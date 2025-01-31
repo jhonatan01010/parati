@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animación de Teatro</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="preloader">
+        <div class="curtain left"></div>
+        <div class="curtain right"></div>
+        <div class="loading-text">
+            <div class="title">PARA TI</div>
+            <div class="name">ANNELYS</div>
+        </div>
+    </div>
+    
+    <div class="content hidden">
+        <div class="scroll-card" onclick="openCard()">
+            <p class="click-instruction">Haz clic o presiona aquí</p>
+            <div class="card-header">
+                <div class="heart">❤️</div>
+                <div class="heart">❤️</div>
+            </div>
+            <div class="card-content">
+                <h2>Te Aprecio ☺️</h2>
+                <p>Aunque el tiempo es corto que hemos compartido en las conversaciones, quiero decirte que eres una mujer hermosa,creo que te estas ganando un pedacito de mi corazón</p>
+                <img src="Img/IMG-20250125-WA0028.jpg" alt="Imagen relacionada">
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(to right, #f8c8dc, #fde2e4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f8c8dc;
+            z-index: 1000;
+            animation: fadeOut 3s forwards 3s;
+        }
+        .curtain {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: #c4d5f9;
+            z-index: 1001;
+            animation: openCurtain 3s forwards;
+        }
+        .curtain.left { left: 0; }
+        .curtain.right { right: 0; }
+        .hidden { display: none; }
+        
+        .scroll-card {
+            background: white;
+            border: 5px solid red;
+            width: 320px;
+            height: 120px;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: height 1s ease-in-out;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: float 2s ease-in-out infinite; /* Animación de flotación corregida */
+        }
+        
+        .scroll-card.open { height: 400px; }
+        .scroll-card .card-content { display: none; }
+        .scroll-card.open .card-content { display: block; }
+
+        .click-instruction {
+            font-size: 16px;
+            color: black;
+            margin-bottom: 10px;
+        }
+        .heart {
+            font-size: 24px;
+            position: absolute;
+        }
+        .heart:nth-child(1) { top: 5px; left: 5px; }
+        .heart:nth-child(2) { top: 5px; right: 5px; }
+
+        .loading-text {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            color: black;
+        }
+        .title {
+            font-size: 3em;
+            font-weight: bold;
+            color: #a2acbd;
+        }
+        .name {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #a2acbd;
+        }
+
+        @keyframes openCurtain {
+            from { width: 50%; }
+            to { width: 0; }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Ajustar imagen dentro de la carta */
+        .card-content img {
+            max-width: 100%; /* Asegura que la imagen no sea más ancha que el contenedor */
+            max-height: 180px; /* Limita la altura para que no desborde */
+            object-fit: cover; /* Ajusta la imagen sin distorsionar */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+
+    </style>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+                document.querySelector(".preloader").style.display = "none";
+                document.querySelector(".content").classList.remove("hidden");
+            }, 3000);
+        });
+        
+        function openCard() {
+            document.querySelector(".scroll-card").classList.toggle("open");
+        }
+    </script>
+</body>
+</html>
